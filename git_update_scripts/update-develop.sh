@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
+set -e
 
-git --git-dir=/factorio/scenarios/develop/.git/ --work-tree=/factorio/scenarios/develop/ fetch origin
-git --git-dir=/factorio/scenarios/develop/.git/ --work-tree=/factorio/scenarios/develop/ reset --hard origin/develop
+### These need to be set to pass them to the generic updater
 
-cp /factorio/scenarios/develop/map_selection.lua.sample /factorio/scenarios/develop/map_selection.lua
-touch /factorio/scenarios/develop
-echo "Develop updated successfully"
+folder="develop"
+repository="origin"
+branch="develop"
+map="default"
+cleanup=false
+debug=false
+
+source /home/factorio/bin/generic-updater.sh
+
+echo "$folder updated successfully."
+
+exit 0

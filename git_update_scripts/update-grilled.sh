@@ -1,21 +1,32 @@
 #!/usr/bin/env bash
+set -e
+user="grilled"
 #$1 = the branch
+#$2 = the map
 
-folder=grilled
-
-if [ -z "$1" ]
-then
-      echo "Missing argument"
-      exit 1
+if [ -z "$1" ]; then
+    echo "Missing argument: need to specify the branch."
+    exit 1
 fi
 
-git --git-dir=/factorio/scenarios/$folder/.git/ --work-tree=/factorio/scenarios/$folder/ fetch $folder
-git --git-dir=/factorio/scenarios/$folder/.git/ --work-tree=/factorio/scenarios/$folder/ reset --hard $folder/"$1"
+if [ -z "$2" ]; then
+    map_check="default"
+    echo "No map provided, using default."
+else
+    map_check=$2
+fi
 
-rm /factorio/scenarios/$folder/map_gen/data/.map_previews -rf
-rm /factorio/scenarios/$folder/redmew_git_banner.png
+### These need to be set to pass them to the generic updater
 
-touch /factorio/scenarios/$folder
-echo '_DEBUG = true' > /factorio/scenarios/$folder/map_selection.lua
-echo '_CHEATS = true' >> /factorio/scenarios/$folder/map_selection.lua
-echo "return require 'map_gen.maps.default'" >> /factorio/scenarios/$folder/map_selection.lua
+folder=$user
+repository=$user
+branch=$1
+map=$map_check
+cleanup=false
+debug=true
+
+source /home/factorio/bin/generic-updater.sh
+
+echo "$folder updated successfully with map: $map"
+
+exit 0

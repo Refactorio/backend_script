@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
+set -e
 
-git --git-dir=/factorio/scenarios/crashsite/.git/ --work-tree=/factorio/scenarios/crashsite/ fetch origin
-git --git-dir=/factorio/scenarios/crashsite/.git/ --work-tree=/factorio/scenarios/crashsite/ reset --hard origin/develop
+### These need to be set to pass them to the generic updater
 
-echo "return require 'map_gen.maps.crash_site'" > /factorio/scenarios/crashsite/map_selection.lua
-rm /factorio/scenarios/crashsite/map_gen/data -rf
-rm /factorio/scenarios/crashsite/redmew_git_banner.png
-touch /factorio/scenarios/crashsite
-echo "Crashsite updated successfully"
+folder="crashsite"
+repository="origin"
+branch="develop"
+map="crash_site"
+cleanup=true
+debug=true
+
+source /home/factorio/bin/generic-updater.sh
+
+echo "$folder updated successfully."
+
+exit 0

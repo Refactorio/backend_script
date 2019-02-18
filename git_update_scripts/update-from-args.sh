@@ -1,41 +1,56 @@
 #!/usr/bin/env bash
-#$1 = $folder = the folder folder
-#$2 = the repository
-#$3 = the branch
-#$4 = the map to load
-#$5 = debug + cheat
-
 set -e
+#$1 = folder
+#$2 = repository
+#$3 = branch
+#$4 = map
+#$5 = cleanup (delete the map_gen/data folder)
+#$6 = debug
 
-if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]
-then
-    echo "Missing argument"
+if [ -z "$1" ]; then
+    echo "Missing argument: folder."
     exit 1
 fi
+if [ -z "$2" ]; then
+    echo "Missing argument: repository."
+    exit 1
+fi
+if [ -z "$3" ]; then
+    echo "Missing argument: branch."
+    exit 1
+fi
+if [ -z "$4" ]; then
+    echo "Missing argument: map."
+    exit 1
+fi
+if [ -z "$5" ]; then
+    echo "Missing argument: cleanup."
+    exit 1
+elif [ "$5" == 'true' ]; then
+    cleanup=true
+elif [ "$5" == 'false' ]; then
+    cleanup=false
+fi
+if [ -z "$6" ]; then
+    echo "Missing argument: debug."
+    exit 1
+elif [ "$6" == 'true' ]; then
+    cleanup=true
+elif [ "$6" == 'false' ]; then
+    cleanup=false
+fi
 
-### Below is generic
+### These need to be set to pass them to the generic updater
 
 folder=$1
 repository=$2
 branch=$3
 map=$4
-debug=$5
+cleanup=$5
+debug=$6
 
-git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ fetch "$repository"
-git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ reset --hard "$repository/$branch"
+source /home/factorio/bin/generic-updater.sh
 
-rm /factorio/scenarios/"$folder"/map_gen/data/.map_previews -rf
-rm /factorio/scenarios/"$folder"/redmew_git_banner.png
+echo "$folder updated successfully with map: $map"
 
-if [ -z "$debug" ]
-then
-    echo "Setting up without debug"
-    echo "return require 'map_gen.maps.$map'" >> /factorio/scenarios/"$folder"/map_selection.lua
-else
-    echo "Setting up with debug"
-    echo '_DEBUG = true' > /factorio/scenarios/"$folder"/map_selection.lua
-    echo '_CHEATS = true' >> /factorio/scenarios/"$folder"/map_selection.lua
-    echo "return require 'map_gen.maps.$map'" >> /factorio/scenarios/"$folder"/map_selection.lua
-fi
-
-touch /factorio/scenarios/"$folder"
+exit 0

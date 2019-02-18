@@ -1,8 +1,31 @@
 #!/usr/bin/env bash
+set -e
+#$1 = the PR#
+#$2 = the map
 
-git --git-dir=/factorio/scenarios/PR/.git/ --work-tree=/factorio/scenarios/PR/ fetch origin
-git --git-dir=/factorio/scenarios/PR/.git/ --work-tree=/factorio/scenarios/PR/ reset --hard origin/pr/"$1"
+if [ -z "$1" ]; then
+    echo "Missing argument: need to specify the PR#."
+    exit 1
+fi
 
-echo '_DEBUG = true' > /factorio/scenarios/PR/map_selection.lua
-echo '_CHEATS = true' >> /factorio/scenarios/PR/map_selection.lua
-echo "return require 'map_gen.maps.default'" >> /factorio/scenarios/PR/map_selection.lua
+if [ -z "$2" ]; then
+    map_check="default"
+    echo "No map provided, using default."
+else
+    map_check=$2
+fi
+
+### These need to be set to pass them to the generic updater
+
+folder="PR"
+repository="origin"
+branch="pr/$1"
+map=$map_check
+cleanup=false
+debug=true
+
+source /home/factorio/bin/generic-updater.sh
+
+echo "$folder updated successfully with map: $map"
+
+exit 0

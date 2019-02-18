@@ -8,7 +8,7 @@ repository="origin"
 branch="develop"
 map="crash_site"
 cleanup=true
-debug=true
+debug=false
 
 source /home/factorio/bin/generic-updater.sh
 

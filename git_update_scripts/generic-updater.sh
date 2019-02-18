@@ -24,6 +24,8 @@ git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenario
 if [ "$cleanup" = true ]; then
     echo "Deleting all map data."
     rm /factorio/scenarios/"$folder"/map_gen/data/ -rf
+else
+    echo "Not deleting map data."
 fi
 
 echo "Deleting map previews and the banner."

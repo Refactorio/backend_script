@@ -30,14 +30,18 @@ elif [ "$5" == 'true' ]; then
     cleanup=true
 elif [ "$5" == 'false' ]; then
     cleanup=false
+else
+    cleanup=$5
 fi
 if [ -z "$6" ]; then
     echo "Missing argument: debug."
     exit 1
 elif [ "$6" == 'true' ]; then
-    cleanup=true
+    debug=true
 elif [ "$6" == 'false' ]; then
-    cleanup=false
+    debug=false
+else
+    debug=$6
 fi
 
 ### These need to be set to pass them to the generic updater
@@ -46,8 +50,6 @@ folder=$1
 repository=$2
 branch=$3
 map=$4
-cleanup=$5
-debug=$6
 
 source /home/factorio/bin/generic-updater.sh
 

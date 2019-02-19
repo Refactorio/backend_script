@@ -22,8 +22,7 @@ git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenario
 git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ reset --hard "$repository/$branch" >/dev/null
 git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ rev-parse --short HEAD
 
-echo "Deleting map previews and the banner."
-rm /factorio/scenarios/"$folder"/map_gen/data/.map_previews -rf
+echo "Deleting the banner."
 rm /factorio/scenarios/"$folder"/redmew_git_banner.png -f
 
 if [ "$cleanup" = true ]; then

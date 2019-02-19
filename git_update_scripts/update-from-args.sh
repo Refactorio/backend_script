@@ -47,6 +47,8 @@ repository=$2
 branch=$3
 map=$4
 
+echo "Updating $folder..."
+
 source /home/factorio/bin/generic-updater.sh
 
 echo "$folder updated from $repository/$branch successfully with map: $map"

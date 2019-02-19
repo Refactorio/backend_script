@@ -5,7 +5,7 @@ set -e #this forces an exit on any error
 script_path='/home/factorio/backend_scripts/git_update_scripts/update-from-args.sh'
 
 {
-"$script_path" develop origin develop default false false
-"$script_path" crashsite origin develop crash_site false false
-"$script_path" dev-debug origin develop default false true
-} >> '/home/factorio/backend_scripts/logs/github_webhook_output.txt'
+    "$script_path" develop origin develop default false false
+    "$script_path" crashsite origin develop crash_site false false
+    "$script_path" dev-debug origin develop default false true
+} >>'/home/factorio/backend_scripts/logs/github_webhook_output.txt'

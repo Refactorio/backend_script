@@ -14,4 +14,6 @@ log_path='/home/factorio/backend_scripts/logs/github_webhook_output.txt'
     "$script_path" dev-debug origin develop default false true
     echo '-'
     "$script_path" crashsite origin develop crash_site true false
+    echo '-'
+    "$script_path" diggy origin develop diggy true false
 } >>"$log_path"

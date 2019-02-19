@@ -51,6 +51,6 @@ debug=$6
 
 source /home/factorio/bin/generic-updater.sh
 
-echo "$folder updated successfully with map: $map"
+echo "$folder updated from $repository/$branch successfully with map: $map"
 
 exit 0

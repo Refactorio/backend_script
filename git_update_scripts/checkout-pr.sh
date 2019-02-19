@@ -26,6 +26,4 @@ debug=true
 
 source /home/factorio/bin/generic-updater.sh
 
-echo "$folder updated successfully with map: $map"
-
-exit 0
+echo "$folder updated successfully with PR:$1 and map: $map"

@@ -28,8 +28,6 @@ if [ -z "$5" ]; then
     exit 1
 elif [ "$5" == 'true' ]; then
     cleanup=true
-elif [ "$5" == 'false' ]; then
-    cleanup=false
 else
     cleanup=$5
 fi
@@ -38,8 +36,6 @@ if [ -z "$6" ]; then
     exit 1
 elif [ "$6" == 'true' ]; then
     debug=true
-elif [ "$6" == 'false' ]; then
-    debug=false
 else
     debug=$6
 fi
@@ -54,5 +50,3 @@ map=$4
 source /home/factorio/bin/generic-updater.sh
 
 echo "$folder updated from $repository/$branch successfully with map: $map"
-
-exit 0

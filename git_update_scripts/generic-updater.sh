@@ -18,8 +18,8 @@ if [ -z "$map" ]; then
     exit 1
 fi
 
-git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ fetch "$repository"
-git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ reset --hard "$repository/$branch"
+git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ fetch "$repository" >/dev/null
+git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ reset --hard "$repository/$branch" >/dev/null
 
 if [ "$cleanup" = true ]; then
     echo "Deleting all map data."
@@ -43,5 +43,3 @@ else
 fi
 
 touch /factorio/scenarios/"$folder"
-
-exit 0

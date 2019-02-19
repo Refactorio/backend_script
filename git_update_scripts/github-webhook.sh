@@ -8,8 +8,10 @@ log_path='/home/factorio/backend_scripts/logs/github_webhook_output.txt'
 {
     echo '------------------------------------------'
     date
+    echo '-'
     "$script_path" develop origin develop default false false
+    echo '-'
     "$script_path" crashsite origin develop crash_site false false
+    echo '-'
     "$script_path" dev-debug origin develop default false true
-    echo '------------------------------------------'
 } >>"$log_path"

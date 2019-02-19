@@ -22,16 +22,16 @@ git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenario
 git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ reset --hard "$repository/$branch" >/dev/null
 git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ rev-parse --short HEAD
 
+echo "Deleting map previews and the banner."
+rm /factorio/scenarios/"$folder"/map_gen/data/.map_previews -rf
+rm /factorio/scenarios/"$folder"/redmew_git_banner.png -f
+
 if [ "$cleanup" = true ]; then
     echo "Deleting all map data."
     rm /factorio/scenarios/"$folder"/map_gen/data/ -rf
 else
     echo "Not deleting map data."
 fi
-
-echo "Deleting map previews and the banner."
-rm /factorio/scenarios/"$folder"/map_gen/data/.map_previews -rf
-rm /factorio/scenarios/"$folder"/redmew_git_banner.png
 
 if [ "$debug" = true ]; then
     echo "Setting _DEBUG and _CHEATS on."

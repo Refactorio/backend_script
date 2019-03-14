@@ -38,8 +38,8 @@ fi
 
 if [ "$debug" = true ]; then
     echo "Setting _DEBUG and _CHEATS on."
-    echo '_DEBUG = true' >/factorio/scenarios/"$folder"/map_selection.lua
-    echo '_CHEATS = true' >>/factorio/scenarios/"$folder"/map_selection.lua
+    echo "_DEBUG = true" >/factorio/scenarios/"$folder"/map_selection.lua
+    echo "_CHEATS = true" >>/factorio/scenarios/"$folder"/map_selection.lua
     echo "return require 'map_gen.maps.$map'" >>/factorio/scenarios/"$folder"/map_selection.lua
 else
     echo "Setting _DEBUG and _CHEATS off."

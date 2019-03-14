@@ -38,7 +38,7 @@ repository=$2
 branch=$3
 map=$4
 
-echo "Updating $folder..."
+echo "Updating folder: \"$folder\"..."
 
 source /home/factorio/bin/generic-updater.sh
 

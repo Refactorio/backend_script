@@ -22,7 +22,6 @@ folder=$user
 repository=$user
 branch=$1
 map=$map_check
-cleanup=true
 debug=true
 
 source /home/factorio/bin/generic-updater.sh

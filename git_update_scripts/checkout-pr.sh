@@ -21,7 +21,6 @@ folder="PR"
 repository="origin"
 branch="pr/$1"
 map=$map_check
-cleanup=false
 debug=true
 
 source /home/factorio/bin/generic-updater.sh

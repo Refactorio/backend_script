@@ -1,36 +1,39 @@
 #!/usr/bin/env bash
 set -e
+repo_name="RedMew"
 
 if [ -z "$folder" ]; then
-    echo "Missing argument: folder, this is plague's fault."
+    echo "Missing argument: folder."
     exit 1
 fi
 if [ -z "$repository" ]; then
-    echo "Missing argument: repository, this is plague's fault."
+    echo "Missing argument: repository."
     exit 1
 fi
 if [ -z "$branch" ]; then
-    echo "Missing argument: branch, this is plague's fault."
+    echo "Missing argument: branch."
     exit 1
 fi
 if [ -z "$map" ]; then
-    echo "Missing argument: map, this is plague's fault."
+    echo "Missing argument: map."
     exit 1
 fi
 
-git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ fetch "$repository" >/dev/null
-git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ reset --hard "$repository/$branch" >/dev/null
+repository="https://github.com/$repository/$repo_name.git"
+
+git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ fetch "$repository" "$branch"
+git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ reset --hard "FETCH_HEAD"
 git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ rev-parse --short HEAD
 git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ log -1 --pretty=%B
 
 echo "Deleting the banner."
 rm /factorio/scenarios/"$folder"/redmew_git_banner.png -f
 
-if [ "$cleanup" = true ]; then
-    echo "Deleting all map data."
+file=/factorio/scenarios/"$folder"/map_gen/maps/"$map".lua
+
+if grep -q "data.presets" "$file"; then
+    echo "Deleting preset map data."
     rm /factorio/scenarios/"$folder"/map_gen/data/ -rf
-else
-    echo "Not deleting map data."
 fi
 
 if [ "$debug" = true ]; then

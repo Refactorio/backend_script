@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#parameters: $1=folder $2=username $3=branch $4=map $5=debug
+#parameters: $1=folder $2=repository $3=branch $4=map $5=debug
 set -e
 repo_name="RedMew"
 
 folder=$1
-username=$2
+repository=$2
 branch=$3
 map=$4
 
@@ -12,8 +12,8 @@ if [ -z "$folder" ]; then
     echo "Missing argument: folder."
     exit 1
 fi
-if [ -z "$username" ]; then
-    echo "Missing argument: github username."
+if [ -z "$repository" ]; then
+    echo "Missing argument: github repository."
     exit 1
 fi
 if [ -z "$branch" ]; then
@@ -33,7 +33,7 @@ fi
 
 echo "Updating folder: \"$folder\"..."
 
-url="https://github.com/$username/$repo_name.git"
+url="https://github.com/$repository/$repo_name.git"
 
 git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ fetch "$url" "$branch" > /dev/null
 git --git-dir=/factorio/scenarios/"$folder"/.git/ --work-tree=/factorio/scenarios/"$folder"/ reset --hard "FETCH_HEAD" > /dev/null
@@ -62,4 +62,4 @@ fi
 
 touch /factorio/scenarios/"$folder"
 
-echo "$folder updated from $username $branch successfully with map: $map"
+echo "$folder updated from $repository $branch successfully with map: $map"

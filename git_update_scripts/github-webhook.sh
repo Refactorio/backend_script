@@ -5,7 +5,7 @@ if [ "$1" != "develop" ]; then
     exit 0
 fi
 
-#arguments to script: $1=folder $2=username $3=branch $4=map $5=debug
+#arguments to script: $1=folder $2=repository $3=branch $4=map $5=debug
 script_path='/home/factorio/backend_scripts/git_update_scripts/generic-updater.sh'
 log_path='/home/factorio/backend_scripts/logs/github_webhook_output.txt'
 

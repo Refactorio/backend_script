@@ -20,4 +20,6 @@ log_path='/home/factorio/backend_scripts/logs/github_webhook_output.txt'
     "$script_path" crashsite Refactorio develop crash_site false
     echo '-'
     "$script_path" diggy Refactorio develop diggy false
+    echo '-'
+    "$script_path" crashsite-desert Refactorio develop crash_site_desert false
 } >>"$log_path"
